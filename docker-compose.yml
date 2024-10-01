@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  database:
+    build:
+      context: ./database
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./database/data:/data/db
+    env_file:
+      - back/.env
+
+volumes:
+  database:
+    driver: local
