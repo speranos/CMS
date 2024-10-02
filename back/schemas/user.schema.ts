@@ -6,7 +6,7 @@ export class User {
   username: string;
 
   @Prop({ required: true })
-  pass: string;
+  Pass: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
