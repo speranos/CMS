@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CourseDto } from 'Dtos/course.dto';
 import { JwtGuard } from 'guards/jwt.guard';
@@ -20,9 +20,14 @@ export class CourseController {
   }
 
 
-  @Get()
-  async fetch(){
-
+  @Get('course')
+  async fetch(@Query('page') page: number, @Query('itemsPerPage') itemsPerPage: number){
+    try{
+      return await this.courseService.getCourse(page, itemsPerPage);
+    }
+    catch(err){
+      throw new UnauthorizedException("Diddy in the house !")
+    }
   }
   // @Get()
   // async fetch_by_user(){

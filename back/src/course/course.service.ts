@@ -14,4 +14,11 @@ export class CourseService {
         console.log(ret);
         return 'created !';
     }
+    async getCourse(page: number, itemsPerPage: number){
+        const ret = await this.CourseModule.find().skip(page * itemsPerPage).limit(itemsPerPage);
+        console.log(page, itemsPerPage, page * itemsPerPage );
+        if(!ret)
+            return 'Out Of range !';
+        return ret;
+    }
 }

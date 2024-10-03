@@ -10,6 +10,11 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
   }));
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    methods: 'GET,POST',
+    credentials: true,
+  });
   console.log("PORT ======= ",process.env.SERVER_PORT);
   console.log(process.env.DATABASE_URL+process.env.DATABASE_NAME);
 
