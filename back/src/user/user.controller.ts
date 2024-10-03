@@ -28,13 +28,12 @@ async Signin(@Body() UserDto: UserDto){
     throw new UnauthorizedException("Incorrect UserName or Password !")
   }
 }
-
   
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
 
-  @Post('Logout')
-  async Logout(){
+  // @Post('Logout')
+  // async Logout(){
 
-  }
+  // }
 
 }

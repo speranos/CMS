@@ -14,7 +14,7 @@ mongo_indexof_db=$(mongosh --quiet --eval "db.getMongo().getDBNames().indexOf('$
 echo "index ===== $mongo_indexof_db"
 
 if [ "$mongo_indexof_db" -lt 0 ]; then
-    mongoimport --db=${DATABASE_NAME} --collection='Post' --file='courses_data.json' --jsonArray
+    mongoimport --db=${DATABASE_NAME} --collection='courses' --file='courses_data.json' --jsonArray
     echo "MongoDB database does not exist"
 else
     echo "MongoDB database exists"

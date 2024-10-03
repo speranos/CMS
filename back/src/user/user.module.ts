@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { User, UserSchema } from 'schemas/user.schema';
 import { MongooseModule } from '@nestjs/mongoose';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from 'strategy/jwt.strategy';
 import { JwtGuard } from 'guards/jwt.guard';
 
