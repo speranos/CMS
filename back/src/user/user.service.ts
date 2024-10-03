@@ -10,7 +10,7 @@ import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 
 @Injectable()
 export class UserService {
-    constructor(@InjectModel(User.name) private UserModule: Model<User>, jwt: JwtService){}
+    constructor(@InjectModel(User.name) private UserModule: Model<User>, private jwt: JwtService){}
 
     async createUSer(UserDto: UserDto){
         const saltOrRounds = 10;
@@ -28,8 +28,10 @@ export class UserService {
         const valid = await bcrypt.compare(UserDto.Pass, user.Pass);
         if(!valid)
             throw new UnauthorizedException;
-        console.log(user);
-        return;
+        const { Pass, ...Juser } = UserDto;
+        const jj = this.jwt.sign(Juser);
+        console.log(jj);
+        return jj;
     }
 
 }
