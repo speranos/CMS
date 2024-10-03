@@ -68,7 +68,7 @@ export default function CourseComponent() {
         <>
           <section className={styles.cardContainer}>
             {data.map((course) => (
-              <Link href={`/course/${course.id}`} key={course.id} className={styles.cardLink}>
+              <Link href={`/course/${course._id}`} key={course._id} className={styles.cardLink}>
                 <div className={styles.card}>
                   <h2 className={styles.cardTitle}>{course.title}</h2>
                   <p className={styles.cardDescription}>
