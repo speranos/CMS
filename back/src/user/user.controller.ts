@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, Post, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { validate } from 'class-validator';
 import { UserDto } from 'Dtos/user_init.dto';
 import { JwtGuard } from 'guards/jwt.guard';
 import { UserService } from './user.service';
@@ -7,17 +8,24 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @UseGuards(JwtGuard)
-
+  
   @Post('Signup')
   async Signup(@Body() UserDto: UserDto){
+    try{
     return await this.userService.createUSer(UserDto);
   }
-
-  @Post('Signin')
-  async Signin(UserDto: UserDto){
-    return await this.userService.checkUSer(UserDto);
+  catch(err){
+    throw new UnauthorizedException("User already exist please loging !")
   }
+}
+
+@Post('Signin')
+async Signin(UserDto: UserDto){
+  return await this.userService.checkUSer(UserDto);
+}
+
+  
+  @UseGuards(JwtGuard)
 
   @Post('Logout')
   async Logout(){
