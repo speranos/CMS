@@ -20,8 +20,13 @@ export class UserController {
 }
 
 @Post('Signin')
-async Signin(UserDto: UserDto){
-  return await this.userService.checkUSer(UserDto);
+async Signin(@Body() UserDto: UserDto){
+  try{
+    return await this.userService.checkUSer(UserDto);
+  }
+  catch(err){
+    throw new UnauthorizedException("Incorrect UserName or Password !")
+  }
 }
 
   
