@@ -10,7 +10,36 @@ services:
       - ./database/data:/data/db
     env_file:
       - back/.env
+    restart: always
+    networks:
+      - cms-net
 
+  
+  back:
+    build:
+      context: ./back
+    ports:
+      - "4000:4000"
+    env_file:
+      - back/.env
+    restart: always
+    networks:
+      - cms-net
+
+
+  front:
+    build:
+      context: ./front
+    ports:
+      - "3000:3000"
+    restart: always
+    networks:
+      - cms-net
+    
+
+networks:
+  cms-net:
+    driver: bridge
 volumes:
   database:
     driver: local

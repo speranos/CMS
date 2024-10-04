@@ -15,9 +15,7 @@ async function bootstrap() {
     methods: 'GET,POST',
     credentials: true,
   });
-  console.log("PORT ======= ",process.env.SERVER_PORT);
-  console.log(process.env.DATABASE_URL+process.env.DATABASE_NAME);
 
-  await app.listen(process.env.SERVER_PORT);
+  await app.listen(4000);
 }
 bootstrap();
