@@ -7,7 +7,7 @@ import { CourseModule } from './course/course.module';
 
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost:27017/MyMongo'),
+  imports: [MongooseModule.forRoot('mongodb://database:27017/MyMongo'),
             UserModule,
             CourseModule,
           ],
