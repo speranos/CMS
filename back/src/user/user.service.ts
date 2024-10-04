@@ -18,7 +18,8 @@ export class UserService {
         UserDto.Pass = hash;
         const ret = await new this.UserModule(UserDto);
         await ret.save();
-        return ;
+        console.log(ret);
+        return  'User Created successfully you can Sign In';
     }
 
     async checkUSer(UserDto: UserDto){
@@ -31,7 +32,13 @@ export class UserService {
         const { Pass, ...Juser } = UserDto;
         const jj = this.jwt.sign(Juser);
         console.log(jj);
-        return jj;
+        interface login{
+            userId: string,
+            Jwt: string,
+        }
+        let login = {userId: user.id, Jwt: jj}
+        console.log(login);
+        return login;
     }
 
 }

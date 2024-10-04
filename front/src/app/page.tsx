@@ -1,21 +1,24 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
+import { useUser } from './context/UserContext';
 
 export default function CourseComponent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [user, setUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
   const itemsPerPage = 12;
 
+  const { user, setUser } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true); 
+        setLoading(true);
         setError(null);
 
         const response = await fetch(
@@ -44,22 +47,35 @@ export default function CourseComponent() {
     setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
   };
 
+  const handleLogout = () => {
+    setUser(null);
+    router.push('/');
+  };
+
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>Welcome to CMS Platform</h1>
-
       <nav className={styles.navbar}>
         <button 
           className={styles.navButton} 
           onClick={() => window.location.href = '/'}>
           Home
         </button>
-        <button className={styles.navButton}>Dashboard</button>
-        <button className={styles.navButton}>
-          {user ? 'Logout' : 'Sign In / Sign Up'}
-        </button>
+        <Link href='/Dashboard'>
+          <button className={styles.navButton}>Dashboard</button>
+        </Link>
+        {user ? (
+          <button className={styles.navButton} onClick={handleLogout}>
+            Logout
+          </button>
+        ) : (
+          <Link href='/auth'>
+            <button className={styles.navButton}>
+              Sign In / Sign Up
+            </button>
+          </Link>
+        )}
       </nav>
-
       {loading ? (
         <p className={styles.loading}>Loading courses...</p>
       ) : error ? (
@@ -72,17 +88,16 @@ export default function CourseComponent() {
                 <div className={styles.card}>
                   <h2 className={styles.cardTitle}>{course.title}</h2>
                   <p className={styles.cardDescription}>
-                  {course.description.replace(/\s+/g, ' ').length > 100 
-                    ? course.description.replace(/\s+/g, ' ').substring(0, 100) + '...' 
-                    : course.description.replace(/\s+/g, ' ')}
-                   </p>
+                    {course.description.replace(/\s+/g, ' ').length > 100 
+                      ? course.description.replace(/\s+/g, ' ').substring(0, 100) + '...' 
+                      : course.description.replace(/\s+/g, ' ')}
+                  </p>
                   <p className={styles.cardInstructor}>By: {course.instructor}</p>
                   <p className={styles.cardSchedule}>{course.schedule}</p>
                 </div>
               </Link>
             ))}
           </section>
-
           <div className={styles.pagination}>
             <button
               onClick={prevPage}
@@ -91,9 +106,7 @@ export default function CourseComponent() {
             >
               Previous
             </button>
-
             <span className={styles.currentPage}>Page {currentPage}</span>
-
             <button onClick={nextPage} className={styles.pageButton}>
               Next
             </button>

@@ -1,0 +1,94 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: black;
+  }
+  
+  .authBox {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .isSi {
+    font-size: 2rem;
+    color: #2a2a72;
+    margin-bottom: 1rem;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .inputGroup {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  
+  .container > label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: white;
+    background-color: #2a2a72;
+  }
+  
+  .inputField:focus {
+    outline: none;
+    border-color: #2a2a72;
+  }
+  
+  .message {
+    margin: 1rem 0;
+    color: red;
+    font-weight: bold;
+  }
+  
+  .submitButton {
+    background-color: #2a2a72;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .submitButton:hover {
+    background-color: #1a1a52;
+  }
+  
+  .toggleText {
+    margin-top: 1rem;
+  }
+  
+  .toggleButton {
+    background: none;
+    border: none;
+    color: #2a2a72;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: underline;
+  }
+  
+  .toggleButton:hover {
+    color: #1a1a52;
+  }
+  

@@ -12,7 +12,7 @@ import { JwtGuard } from 'guards/jwt.guard';
   imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   JwtModule.register({
      secret: String(process.env.JWT_SECRET),
-     signOptions: { expiresIn: '120s'}
+     signOptions: { expiresIn: '30s'}
   }) ],
   controllers: [UserController],
   providers: [UserService, JwtStrategy, JwtGuard],
