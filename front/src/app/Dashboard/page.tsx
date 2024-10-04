@@ -28,13 +28,14 @@ export default function UserDashboard() {
       setLoading(true);
       setError(null);
 
+    //   const 
       const response = await fetch(
         `http://localhost:4000/usercourses/${user.userId}?page=${currentPage}&itemsPerPage=${itemsPerPage}`,
-        {
-          headers: {
-            Authorization: `Bearer ${user.Jwt}`,
-          },
-        }
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${user.Jwt}`,
+        //   },
+        // }
       );
 
       if (!response.ok) {

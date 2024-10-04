@@ -17,6 +17,8 @@ export class CourseService {
         return 'created !';
     }
     async   getCourse(page: number, itemsPerPage: number){
+        if(page = 1)
+            page = 0;
         const ret = await this.CourseModule.find().skip(page * itemsPerPage).limit(itemsPerPage);
         console.log(page, itemsPerPage, page * itemsPerPage );
         if(!ret)
@@ -32,11 +34,12 @@ export class CourseService {
     }
     async GetByUser(page: number, itemsPerPage: number, id: string){
         const username = await this.Userserv.GetUserName(id);
-
+        if(page = 1)
+            page = 0;
         const ret = await this.CourseModule.find({instructor: username}).skip(page * itemsPerPage).limit(itemsPerPage);
         console.log(ret );
         if(!ret)
-            return 'Out Of range !';
+            return 'No Course Yet Create One !';
         return ret;
 
     }

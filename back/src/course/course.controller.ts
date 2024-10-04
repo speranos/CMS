@@ -1,18 +1,21 @@
-import { Body, Controller, Get, Param, Post, Query, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, Query, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CourseDto } from 'Dtos/course.dto';
 import { JwtGuard } from 'guards/jwt.guard';
 import { CourseService } from './course.service';
+import { Response } from 'express';
 
 @Controller()
 export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   @Post('Create')
-  async Add(@Body() course: CourseDto){
+  async Add(@Body() course: CourseDto, @Res() res: Response){
     try{
-      return await this.courseService.createCourse(course);
+      console.log("HAAAAAAAA", course);
+      await this.courseService.createCourse(course);
+      return res.status(HttpStatus.CREATED).json({message: 'success'});
     }
     catch(err){
       throw new UnauthorizedException("Missing field !")

@@ -43,7 +43,6 @@ export class UserService {
 
     async GetUserName(_id: string){
         const username = await this.UserModule.findById(_id)
-        console.log(username);
         if(!username.UserName)
             return null;
         return username.UserName;

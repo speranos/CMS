@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Post, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { UserDto } from 'Dtos/user_init.dto';
 import { JwtGuard } from 'guards/jwt.guard';
@@ -32,8 +32,23 @@ async Signin(@Body() UserDto: UserDto, @Res() res: Response){
     throw new UnauthorizedException("Incorrect UserName or Password !")
   }
 }
+
+@Get('username/:id')
+async getName(@Param('id') id:string, @Res() res: Response){
+  try{
+    const js = await this.userService.GetUserName(id);
+    return res.status(HttpStatus.OK).json(js);
+  }
+  catch(err){
+    throw new UnauthorizedException("Incorrect UserName or Password !")
+  }
+}
   
-  // @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard)
+  @Get('acc')
+  async getacc(@Res() res: Response){
+    return res.status(HttpStatus.OK)
+  }
 
   // @Post('Logout')
   // async Logout(){
