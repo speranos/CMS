@@ -28,15 +28,16 @@ export default function UserDashboard() {
       setLoading(true);
       setError(null);
 
-    //   const 
+    //   const acc = await fetch('http://localhost:4000/acc',
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${user.Jwt}`,
+    //       },
+    //     });
+    //     if(!acc.ok)
+    //         setUser(null);
       const response = await fetch(
-        `http://localhost:4000/usercourses/${user.userId}?page=${currentPage}&itemsPerPage=${itemsPerPage}`,
-        // {
-        //   headers: {
-        //     Authorization: `Bearer ${user.Jwt}`,
-        //   },
-        // }
-      );
+        `http://localhost:4000/usercourses/${user.userId}?page=${currentPage}&itemsPerPage=${itemsPerPage}`);
 
       if (!response.ok) {
           setUser(null);
