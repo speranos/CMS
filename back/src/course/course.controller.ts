@@ -31,9 +31,21 @@ export class CourseController {
   }
 
   @Get('course/:id')
-  async fetch_by_user(@Param('id') id: string){
+  async fetch_by_page(@Param('id') id: string){
     try{
       return await this.courseService.getsingle(id);
+    }
+    catch(err){
+      throw new UnauthorizedException("Diddy in the house !")
+    }
+  }
+
+  // @UseGuards(JwtGuard)
+  @Get('usercourses/:id')
+  async fetch_by_user(@Query('page') page: number, @Query('itemsPerPage') itemsPerPage: number, @Param('id') id: string){
+    console.log(id);
+    try{
+      return await this.courseService.GetByUser(page, itemsPerPage, id);
     }
     catch(err){
       throw new UnauthorizedException("Diddy in the house !")

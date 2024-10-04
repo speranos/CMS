@@ -3,10 +3,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CourseDto } from 'Dtos/course.dto';
 import { Model } from 'mongoose';
 import { Course } from 'schemas/course.schema';
+import { User } from 'schemas/user.schema';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class CourseService {
-    constructor(@InjectModel(Course.name) private CourseModule: Model<Course>){}
+    constructor(@InjectModel(Course.name) private CourseModule: Model<Course>, private Userserv: UserService){}
 
     async   createCourse(course: CourseDto){
         const ret = await new this.CourseModule(course);
@@ -27,5 +29,15 @@ export class CourseService {
         if(!ret)
             return 'Not found !';
         return ret;
+    }
+    async GetByUser(page: number, itemsPerPage: number, id: string){
+        const username = await this.Userserv.GetUserName(id);
+
+        const ret = await this.CourseModule.find({instructor: username}).skip(page * itemsPerPage).limit(itemsPerPage);
+        console.log(ret );
+        if(!ret)
+            return 'Out Of range !';
+        return ret;
+
     }
 }

@@ -21,6 +21,19 @@ export default function CourseComponent() {
         setLoading(true);
         setError(null);
 
+        // const response = await fetch(
+        //   `http://localhost:4000/user/courses?page=${currentPage}&itemsPerPage=${itemsPerPage}`, // Endpoint to fetch user's courses
+        //   {
+        //     headers: {
+        //       Authorization: `Bearer ${user.Jwt}`,
+        //     },
+        //   }
+        // );
+  
+        // if (!response.ok) {
+        //     setUser(null);
+        //   throw new Error('Failed to load courses');
+        // }
         const response = await fetch(
           `http://localhost:4000/course?page=${currentPage}&itemsPerPage=${itemsPerPage}`
         );

@@ -16,5 +16,6 @@ import { JwtGuard } from 'guards/jwt.guard';
   }) ],
   controllers: [UserController],
   providers: [UserService, JwtStrategy, JwtGuard],
+  exports: [UserService]
 })
 export class UserModule {}
